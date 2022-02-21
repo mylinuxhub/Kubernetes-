@@ -77,3 +77,14 @@ kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all    -
 kubeadm init  --ignore-preflight-errors=all    ----->> this will only on master
 
 •	kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+
+
+=========================================================
+ mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
