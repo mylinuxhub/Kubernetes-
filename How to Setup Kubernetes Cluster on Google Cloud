@@ -28,6 +28,9 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 apt-get update 
 apt-get install docker-ce docker-ce-cli containerd.io
 
+1st Add below line and try to resraer kubelet. If it is not working then try to 2nd one
+(1)
+
 cat <<EOF | sudo tee /etc/docker/daemon.json
     {
       "exec-opts": ["native.cgroupdriver=systemd"],
@@ -39,6 +42,18 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
        }
 EOF
 
+(2)
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+      "exec-opts": ["native.cgroupdriver=cgroupfs"],
+      "log-driver": "json-file",
+      "log-opts": {
+      "max-size": "100m"
+   },
+       "storage-driver": "overlay2"
+       }
+
+EOF
 apt-get install -y kubelet kubeadm kubectl
 
 kubeadm version
