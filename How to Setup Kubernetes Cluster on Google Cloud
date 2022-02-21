@@ -53,6 +53,10 @@ Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"
 vi /etc/default/kubelet
 KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs"
 
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl status  kubelet
+
 
 kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all    ----->> this will only on master
 kubeadm init  --ignore-preflight-errors=all    ----->> this will only on master
